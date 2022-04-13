@@ -10,17 +10,20 @@ const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [film, setFilm] = useState("")
 	const [index, setIndex] = useState("")
-	const [movieList, setmovieList] = useState(JSON.parse(localStorage.getItem('react-movie-list')))
+	const [movieList, setmovieList] = useState(JSON.parse(localStorage.getItem('react-movie-list')) || null)
 
-	useEffect(() => {
-		axios.get('https://swapi.dev/api/films').then(res => {
+	useEffect(async () => {
+		await axios.get('https://swapi.dev/api/films').then(res => {
 			if (movieList) {
 				setMovies(movieList)
 			} else {
-				localStorage.setItem('react-movie-list', JSON.stringify(res.data.results));
 				setMovies(res.data.results)
+				setmovieList(res.data.results)
+				localStorage.setItem('react-movie-list', JSON.stringify(res.data.results));
 			}
-		});
+		}).catch(err => {
+			console.log(err);
+		});;
 	}, [])
 
 	const saveToLocalStorage = (moviesObj) => {
@@ -39,7 +42,6 @@ const App = () => {
 		newList[index].fav = null;
 		saveToLocalStorage(movieList);
 		setMovies(newList)
-		alert("item removed")
 	};
 
 	return (
