@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function MovieList(props) {
 
-	const Click = (film, index) => {
+	const ShowDetails = (film, index) => {
 		props.setFilm(film)
 		props.setIndex(index)
 	}
@@ -14,7 +14,7 @@ function MovieList(props) {
 			{props.movies &&
 				props.movies.map((film, index) => {
 					return (
-						<Wrap onClick={() => Click(film, index)} key={film.episode_id}>
+						<Wrap onClick={() => ShowDetails(film, index)} key={film.episode_id}>
 							{film.title}
 						</Wrap>
 					)
@@ -25,7 +25,6 @@ function MovieList(props) {
 }
 
 export default MovieList
-
 
 const Container = styled.div`
 margin-top: 30px;

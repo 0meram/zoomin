@@ -47,14 +47,12 @@ const App = () => {
 			<Header />
 			<Container>
 				<MovieList
-					film={film}
 					setIndex={setIndex}
 					setFilm={setFilm}
 					movies={movies}
 				/>
 				<MovieDetails
 					film={film}
-					setIndex={setIndex}
 					index={index}
 					addFavoriteMovie={addFavoriteMovie}
 					removeFavoriteMovie={removeFavoriteMovie}
